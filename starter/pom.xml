@@ -7,11 +7,21 @@
     <relativePath>../dependencies</relativePath>
   </parent>
   <artifactId>activiti-cloud-starter-messages</artifactId>
+  <name>Activiti Cloud Starter :: Messages</name>
   
   <dependencies>
     <dependency>
+      <groupId>org.activiti.cloud.messages</groupId>
+      <artifactId>activiti-cloud-services-messages-aggregator</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

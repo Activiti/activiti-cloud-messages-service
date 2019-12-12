@@ -7,6 +7,10 @@
     <relativePath>../dependencies</relativePath>
   </parent>
   <artifactId>activiti-cloud-services-messages</artifactId>
+  <name>Activiti Cloud Services :: Messages</name>
   <packaging>pom</packaging>
   
+  <modules>
+  <module>aggregator</module>
+  </modules>
 </project>
