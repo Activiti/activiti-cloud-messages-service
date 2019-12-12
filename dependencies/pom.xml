@@ -4,7 +4,6 @@
     <groupId>org.activiti.cloud.messages</groupId>
     <artifactId>activiti-cloud-messages-service-parent</artifactId>
     <version>7.1.0-SNAPSHOT</version>
-    <relativePath>..</relativePath>
   </parent>
   <artifactId>activiti-cloud-messages-dependencies</artifactId>
   <packaging>pom</packaging>
@@ -14,7 +13,7 @@
       <dependency>
         <groupId>org.activiti.cloud.messages</groupId>
         <artifactId>activiti-cloud-starter-messages</artifactId>
-        <version>${project.version}</version>
+        <version>${activiti-cloud-messages-service.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
