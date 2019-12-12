@@ -10,7 +10,11 @@
   <name>Activiti Cloud :: Messages Dependencies BOM (Bill Of Materials)</name>
   <dependencyManagement>
     <dependencies>
-    
+      <dependency>
+        <groupId>org.activiti.cloud.messages</groupId>
+        <artifactId>activiti-cloud-starter-messages</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 </project>
