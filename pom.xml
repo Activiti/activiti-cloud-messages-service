@@ -79,6 +79,7 @@
   <module>dependencies</module>
   <module>dependencies-tests</module>
   <module>starter</module>
+  <module>services</module>
   </modules>
 
   <scm>

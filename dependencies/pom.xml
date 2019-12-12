@@ -15,6 +15,11 @@
         <artifactId>activiti-cloud-starter-messages</artifactId>
         <version>${activiti-cloud-messages-service.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.activiti.cloud.messages</groupId>
+        <artifactId>activiti-cloud-services-messages</artifactId>
+        <version>${activiti-cloud-messages-service.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 </project>
