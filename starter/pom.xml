@@ -15,6 +15,18 @@
       <artifactId>activiti-cloud-services-messages-aggregator</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.activiti.cloud.common</groupId>
+      <artifactId>activiti-cloud-services-monitoring</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.activiti.cloud.common</groupId>
+      <artifactId>activiti-cloud-services-tracing</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.activiti.cloud.common</groupId>
+      <artifactId>activiti-cloud-services-logging</artifactId>
+    </dependency>    
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
