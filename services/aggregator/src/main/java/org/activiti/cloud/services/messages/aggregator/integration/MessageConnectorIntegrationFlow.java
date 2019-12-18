@@ -33,6 +33,7 @@ import org.springframework.integration.dsl.IntegrationFlowAdapter;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
 import org.springframework.integration.dsl.Transformers;
 import org.springframework.integration.handler.AbstractMessageProducingHandler;
+import org.springframework.integration.handler.LoggingHandler;
 import org.springframework.integration.handler.advice.HandleMessageAdvice;
 import org.springframework.integration.handler.advice.IdempotentReceiverInterceptor;
 import org.springframework.messaging.Message;
@@ -63,7 +64,7 @@ public class MessageConnectorIntegrationFlow extends IntegrationFlowAdapter {
     @Override
     protected IntegrationFlowDefinition<?> buildFlow() {
         return this.from(processor.input())
-                   .gateway(flow -> flow.log()
+                   .gateway(flow -> flow.log(LoggingHandler.Level.DEBUG)
                                         .filter(Message.class,
                                                 this::filterMessage,
                                                 filterSpec -> filterSpec.id(FILTER_MESSAGE)
