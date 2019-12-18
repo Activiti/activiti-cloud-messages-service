@@ -2,7 +2,6 @@ package org.activiti.cloud.services.messages.aggregator.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +10,6 @@ import org.springframework.integration.transaction.PseudoTransactionManager;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.PlatformTransactionManager;
 
-@Ignore
 @TestPropertySource(properties = {
         "spring.redis.host=localhost",
         "spring.redis.port=6379"})
