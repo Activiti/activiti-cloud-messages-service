@@ -15,8 +15,8 @@
 
   <properties>
     <activiti-cloud-build.version>7.1.12</activiti-cloud-build.version>
-    <activiti-cloud-service-common.version>7.1.103</activiti-cloud-service-common.version>
-    <activiti-cloud-runtime-bundle-service.version>7.1.196</activiti-cloud-runtime-bundle-service.version>
+    <activiti-cloud-service-common.version>7.1.111</activiti-cloud-service-common.version>
+    <activiti-cloud-runtime-bundle-service.version>7.1.202</activiti-cloud-runtime-bundle-service.version>
     <activiti-cloud-messages-service.version>${project.version}</activiti-cloud-messages-service.version>
   </properties>
 
@@ -36,6 +36,14 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.activiti.cloud.rb</groupId>
+        <artifactId>activiti-cloud-runtime-bundle-dependencies</artifactId>
+        <version>${activiti-cloud-runtime-bundle-service.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      
     </dependencies>
   </dependencyManagement>
 
@@ -78,8 +86,8 @@
   <modules>
   <module>dependencies</module>
   <module>dependencies-tests</module>
-  <module>starter</module>
   <module>services</module>
+  <module>starters</module>
   </modules>
 
   <scm>

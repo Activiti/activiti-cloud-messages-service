@@ -12,5 +12,6 @@
   
   <modules>
   <module>aggregator</module>
+  <module>tests</module>
   </modules>
 </project>

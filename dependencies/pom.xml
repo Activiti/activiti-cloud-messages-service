@@ -12,17 +12,37 @@
     <dependencies>
       <dependency>
         <groupId>org.activiti.cloud.messages</groupId>
-        <artifactId>activiti-cloud-starter-messages</artifactId>
-        <version>${activiti-cloud-messages-service.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.activiti.cloud.messages</groupId>
         <artifactId>activiti-cloud-services-messages</artifactId>
         <version>${activiti-cloud-messages-service.version}</version>
       </dependency>
       <dependency>
         <groupId>org.activiti.cloud.messages</groupId>
         <artifactId>activiti-cloud-services-messages-aggregator</artifactId>
+        <version>${activiti-cloud-messages-service.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.activiti.cloud.messages</groupId>
+        <artifactId>activiti-cloud-services-messages-tests</artifactId>
+        <version>${activiti-cloud-messages-service.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.activiti.cloud.messages</groupId>
+        <artifactId>activiti-cloud-starters-messages</artifactId>
+        <version>${activiti-cloud-messages-service.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.activiti.cloud.messages</groupId>
+        <artifactId>activiti-cloud-starter-messages-jdbc</artifactId>
+        <version>${activiti-cloud-messages-service.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.activiti.cloud.messages</groupId>
+        <artifactId>activiti-cloud-starter-messages-redis</artifactId>
+        <version>${activiti-cloud-messages-service.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.activiti.cloud.messages</groupId>
+        <artifactId>activiti-cloud-starter-messages-mongodb</artifactId>
         <version>${activiti-cloud-messages-service.version}</version>
       </dependency>
     </dependencies>
