@@ -2,9 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.activiti.cloud.messages</groupId>
-    <artifactId>activiti-cloud-messages-dependencies</artifactId>
+    <artifactId>activiti-cloud-services-messages</artifactId>
     <version>7.1.0-SNAPSHOT</version>
-    <relativePath>../dependencies</relativePath>
   </parent>
   <artifactId>activiti-cloud-services-messages-tests</artifactId>
   
