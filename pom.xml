@@ -88,6 +88,7 @@
     <module>dependencies-tests</module>
     <module>services</module>
     <module>starters</module>
+    <module>integration-tests</module>
   </modules>
 
   <scm>
