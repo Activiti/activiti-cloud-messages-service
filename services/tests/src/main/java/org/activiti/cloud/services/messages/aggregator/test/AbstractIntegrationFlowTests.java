@@ -141,7 +141,7 @@ public abstract class AbstractIntegrationFlowTests {
         }
     }
     
-    @Test(timeout = 10000)
+    @Test(timeout = 20000)
     public void shouldProcessMessageEventsConcurrently() throws InterruptedException, JsonProcessingException {
         // given
         String messageEventName = "start";
@@ -187,7 +187,7 @@ public abstract class AbstractIntegrationFlowTests {
         assertThat(peek()).isNull();
     }
     
-    @Test(timeout = 10000)
+    @Test(timeout = 20000)
     public void shouldProcessMessageEventsConcurrentlyInReversedOrder() throws InterruptedException, JsonProcessingException {
         // given
         String messageEventName = "start";
