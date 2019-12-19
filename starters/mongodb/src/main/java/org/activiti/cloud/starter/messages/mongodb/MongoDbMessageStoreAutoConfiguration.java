@@ -19,8 +19,10 @@ package org.activiti.cloud.starter.messages.mongodb;
 
 import java.util.Arrays;
 
-import org.activiti.cloud.services.messages.aggregator.config.MessageAggregatorProperties;
+import org.activiti.cloud.services.messages.core.config.MessageAggregatorProperties;
+import org.activiti.cloud.services.messages.core.config.MessagesCoreAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
@@ -52,6 +54,7 @@ import org.springframework.util.StringUtils;
  */
 @Configuration
 @ConditionalOnClass(ConfigurableMongoDbMessageStore.class)
+@AutoConfigureBefore({MessagesCoreAutoConfiguration.class})
 @AutoConfigureAfter({
     MongoAutoConfiguration.class,
     MongoDataAutoConfiguration.class

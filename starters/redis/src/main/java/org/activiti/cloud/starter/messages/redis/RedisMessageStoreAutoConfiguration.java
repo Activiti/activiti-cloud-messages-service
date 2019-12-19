@@ -17,8 +17,10 @@
 package org.activiti.cloud.starter.messages.redis;
 
 
+import org.activiti.cloud.services.messages.core.config.MessagesCoreAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
@@ -36,6 +38,7 @@ import org.springframework.integration.support.locks.LockRegistry;
 
 @Configuration
 @ConditionalOnClass(RedisMessageStore.class)
+@AutoConfigureBefore({MessagesCoreAutoConfiguration.class})
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 public class RedisMessageStoreAutoConfiguration {
 

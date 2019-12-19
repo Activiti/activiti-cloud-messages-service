@@ -84,10 +84,10 @@
   </developers>
   
   <modules>
-  <module>dependencies</module>
-  <module>dependencies-tests</module>
-  <module>services</module>
-  <module>starters</module>
+    <module>dependencies</module>
+    <module>dependencies-tests</module>
+    <module>services</module>
+    <module>starters</module>
   </modules>
 
   <scm>

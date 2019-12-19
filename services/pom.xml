@@ -11,7 +11,7 @@
   <packaging>pom</packaging>
   
   <modules>
-  <module>aggregator</module>
+  <module>core</module>
   <module>tests</module>
   </modules>
 </project>
