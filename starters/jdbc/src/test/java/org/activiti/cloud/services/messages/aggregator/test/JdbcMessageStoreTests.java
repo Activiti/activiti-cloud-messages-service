@@ -4,7 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 import org.springframework.integration.jdbc.store.JdbcMessageStore;
+import org.springframework.test.context.TestPropertySource;
 
+@TestPropertySource(properties = {
+    "spring.datasource.platform=h2"
+})
 public class JdbcMessageStoreTests extends AbstractIntegrationFlowTests {
 
     @Test

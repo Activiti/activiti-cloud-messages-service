@@ -28,6 +28,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 //import org.springframework.boot.data.geode.autoconfigure.ClientCacheAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.integration.jdbc.lock.DefaultLockRepository;
 import org.springframework.integration.jdbc.lock.JdbcLockRegistry;
 import org.springframework.integration.jdbc.lock.LockRepository;
@@ -45,6 +46,7 @@ import org.springframework.util.StringUtils;
     DataSourceAutoConfiguration.class,
     DataSourceTransactionManagerAutoConfiguration.class
 })
+@PropertySource("classpath:config/activiti-cloud-starter-messages-jdbc.properties")
 public class JdbcMessageStoreAutoConfiguration {
 
     @Bean
