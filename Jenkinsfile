@@ -1,13 +1,19 @@
 pipeline {
     agent {
-      label "jenkins-maven-java11"
+        kubernetes {
+            // Change the name of jenkins-maven label to be able to use yaml configuration snippet
+            label "maven-dind-java11"
+            // Inherit from Jx Maven pod template
+            inheritFrom "maven-java11"
+            // Add pod configuration to Jenkins builder pod template
+            yamlFile "maven-dind.yaml"
+        }
     }
     environment {
       ORG                 = 'activiti'
       APP_NAME            = 'activiti-cloud-messages-service'
       CHARTMUSEUM_CREDS   = credentials('jenkins-x-chartmuseum')
-      RELEASE_VERSION     = jx_release_version()
-      PROJECT_VERSION     = maven_project_version()      
+      RELEASE_BRANCH      = "develop"
     }
     stages {
       stage('CI Build and push snapshot') {
@@ -15,6 +21,7 @@ pipeline {
           branch 'PR-*'
         }
         environment {
+          PROJECT_VERSION = maven_project_version()      
           PREVIEW_VERSION = "$PROJECT_VERSION-$BRANCH_NAME-$BUILD_NUMBER"
           PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
           HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
@@ -23,31 +30,30 @@ pipeline {
           container('maven') {
 		    sh "echo PREVIEW_VERSION=$PREVIEW_VERSION"
             sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
-            sh "mvn install"
+            sh "mvn install -DskipITs=false"
           }
-
         }
       }
       stage('Build Release') {
         when {
-          branch 'develop'
+          branch "$RELEASE_BRANCH"
         }
         environment {
-          VERSION = "$RELEASE_VERSION"
+          VERSION = jx_release_version()
         }        
         steps {
           container('maven') {
 		    sh "echo VERSION=$VERSION"
 		                     
             // ensure we're not on a detached head
-            sh "git checkout develop"
+            sh "git checkout $RELEASE_BRANCH"
             sh "git config --global credential.helper store"
 
             sh "jx step git credentials"
             // so we can retrieve the version in later steps
             sh "echo $VERSION > VERSION"
             sh "mvn versions:set -DnewVersion=$VERSION"
-            sh "mvn clean verify"
+            sh "mvn clean verify -DskipITs=false"
 
             retry(5){
               sh "git add --all"
@@ -57,7 +63,7 @@ pipeline {
             }
           }
           container('maven') {
-            sh 'mvn clean deploy -DskipTests'
+            sh "mvn clean deploy -DskipTests"
 
             sh "jx step git credentials"
             retry(2){
