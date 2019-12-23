@@ -29,4 +29,55 @@
     </dependency>    
   </dependencies>
   
+  <profiles>
+    <profile>
+      <id>integration-test</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>skipITs</name>
+          <value>false</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <configuration>
+              <startParallel>true</startParallel>
+              <images>
+                <image>
+                  <name>postgres</name>
+                  <alias>postgres</alias>
+                  <run>
+                    <ports>
+                      <port>5432:5432</port>
+                    </ports>
+                    <wait>
+                      <log>.*database system is ready to accept connections</log>
+                      <time>45000</time>
+                      <shutdown>5000</shutdown>
+                      <kill>1000</kill>
+                    </wait>
+                  </run>
+                </image>
+               </images>
+              <skip>${skipTests}</skip>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>start</goal>
+                  <goal>stop</goal>
+                  <goal>remove</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+  
 </project>
