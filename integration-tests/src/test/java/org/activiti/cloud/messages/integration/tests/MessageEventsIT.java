@@ -71,7 +71,7 @@ import org.springframework.test.context.junit4.SpringRunner;
                     "spring.datasource.url=jdbc:postgresql://localhost:5432/postgres",
                     "spring.datasource.username=postgres",
                     "spring.datasource.password=",
-                    "spring.datasource.platform=postgres",
+                    "spring.datasource.platform=postgresql",
                     "spring.application.name=messages-app",
                     "spring.jmx.enabled=false",
                     "spring.rabbitmq.host=localhost"        

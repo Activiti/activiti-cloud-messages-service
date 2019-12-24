@@ -28,7 +28,7 @@ import org.springframework.test.context.TestPropertySource;
         "spring.datasource.url=jdbc:postgresql://localhost:5432/postgres",
         "spring.datasource.username=postgres",
         "spring.datasource.password=",
-        "spring.datasource.platform=postgres",
+        "spring.datasource.platform=postgresql",
 })
 public class PostgresMessageStoreIT extends AbstractMessagesCoreIntegrationTests {
 
