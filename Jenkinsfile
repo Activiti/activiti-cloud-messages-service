@@ -22,7 +22,7 @@ pipeline {
         }
         environment {
           PROJECT_VERSION = maven_project_version()      
-          PREVIEW_VERSION = "$PROJECT_VERSION-$BRANCH_NAME-$BUILD_NUMBER"
+          PREVIEW_VERSION = "$PROJECT_VERSION-$BRANCH_NAME"
           PREVIEW_NAMESPACE = "$APP_NAME-$BRANCH_NAME".toLowerCase()
           HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
         }
@@ -31,6 +31,7 @@ pipeline {
 		    sh "echo PREVIEW_VERSION=$PREVIEW_VERSION"
             sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
             sh "mvn install -DskipITs=false"
+            sh "mvn deploy -DskipTests"
           }
         }
       }
