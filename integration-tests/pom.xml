@@ -19,13 +19,11 @@
       <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
       <scope>test</scope>
     </dependency>
-<!--
-     <dependency>
+    <dependency>
       <groupId>org.activiti.cloud.rb</groupId>
       <artifactId>activiti-cloud-starter-runtime-bundle</artifactId>
       <scope>test</scope>
     </dependency>
- -->
     <dependency>
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>
@@ -93,26 +91,9 @@
                     </wait>
                   </run>
                 </image>
-<!--
-                 <image>
-                  <name>activiti/activiti-keycloak</name>
-                  <alias>activiti-keycloak</alias>
-                  <run>
-                    <ports>
-                      <port>8180:8180</port>
-                    </ports>
-                    <wait>
-                      <log>Keycloak .* started in</log>
-                      <time>50000</time>
-                      <shutdown>5000</shutdown>
-                      <kill>1000</kill>
-                    </wait>
-                  </run>
-                </image>
- -->
                 <image>
                   <name>rabbitmq:management</name>
-                  <alias>activiti-rabbitmq</alias>
+                  <alias>rabbitmq</alias>
                   <run>
                     <ports>
                       <port>5672:5672</port>
