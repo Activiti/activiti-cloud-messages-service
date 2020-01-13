@@ -163,7 +163,7 @@ public class MessageEventsIT {
         
         Stream.of(expectedStartEventNames)
               .forEach(messageName -> {
-                  String groupId = "messages-app:"+messageName;
+                  String groupId = "messages-app:" + messageName;
                   assertThat(messageGroupStore.getMessagesForGroup(groupId)).hasSize(1);
               });
     }

@@ -21,14 +21,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
 import org.springframework.integration.support.locks.LockRegistry;
-import org.springframework.integration.util.WhileLockedProcessor;
 import org.springframework.messaging.MessagingException;
 import org.springframework.util.ReflectionUtils;
 
 public class LockTemplate {
 
-    WhileLockedProcessor p;
-    
     private final LockRegistry registry;
 
     public LockTemplate(LockRegistry registry) {

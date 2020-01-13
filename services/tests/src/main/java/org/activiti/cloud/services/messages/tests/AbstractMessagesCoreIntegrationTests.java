@@ -35,9 +35,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 import org.activiti.api.process.model.builders.MessageEventPayloadBuilder;
@@ -867,37 +864,13 @@ public abstract class AbstractMessagesCoreIntegrationTests {
         }
 
         @FunctionalInterface
-        public interface ConsumerExceptionWrapper<T, E extends Exception> {
-            void accept(T t) throws E;
-        }
-        
-        @FunctionalInterface
         public interface RunnableExceptionWrapper {
             void run() throws Exception;
         }
-        
-        @FunctionalInterface
-        public interface FunctionExceptionWrapper<T, R, E extends Exception> {
-            R apply(T t) throws E;
-        }
 
-        @FunctionalInterface
-        public interface SupplierExceptionWrapper<T, E extends Exception> {
-            T get() throws E;
-        }    
-        
         public static <T> T call(Callable<T> callable) throws RuntimeException {
             return call(callable, RuntimeException::new);
         }
-        
-        public static <T> Consumer<T> consumer(Consumer<T> consumer) throws RuntimeException {
-            return consumer(consumer, RuntimeException::new);
-        }
-
-        public static <T,R> Function<T,R> function(Function<T,R> function) throws RuntimeException {
-            return function(function, RuntimeException::new);
-        }
-        
 
         public static void run(RunnableExceptionWrapper runnable) {
             try {
@@ -906,44 +879,7 @@ public abstract class AbstractMessagesCoreIntegrationTests {
                 sneakyThrow(e);
             }
         }
-        
 
-        /** .forEach(Try.consumer(name -> System.out.println(Class.forName(name)))); or .forEach(Try.consumer(ClassNameUtil::println)); */
-        public static <T, E extends Throwable> Consumer<T> consumer(Consumer<T> consumer, ExceptionWrapper<E> wrapper) throws E {
-            return t -> {
-                try {
-                    consumer.accept(t);
-                } catch (Exception exception) {
-                    sneakyThrow(exception);
-                }
-            };
-        }
-
-        /** .map(Try.function(name -> Class.forName(name))) or .map(Try.function(Class::forName)) */
-        public static <T, R, E extends Throwable> Function<T, R> function(Function<T, R> function, ExceptionWrapper<E> wrapper) throws E {
-            return t -> {
-                try {
-                    return function.apply(t);
-                } catch (Exception exception) {
-                    sneakyThrow(exception);
-                    return null;
-                }
-            };
-        }
-        
-        /** rethrowSupplier(() -> new StringJoiner(new String(new byte[]{77, 97, 114, 107}, "UTF-8"))), */
-        public static <T, E extends Exception> Supplier<T> supplier(SupplierExceptionWrapper<T, E> function) throws E {
-            return () -> {
-                try {
-                    return function.get();
-                } catch (Exception exception) {
-                    sneakyThrow(exception);
-                    return null;
-                }
-            };
-        }
-
-        
         public static <T, E extends Throwable> T call(Callable<T> callable, ExceptionWrapper<E> wrapper) throws E {
             try {
                 return callable.call();

@@ -24,7 +24,6 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.Expression;
 import org.springframework.integration.aggregator.CorrelationStrategy;
 import org.springframework.integration.aggregator.MessageGroupProcessor;
-import org.springframework.integration.aggregator.MethodInvokingMessageGroupProcessor;
 import org.springframework.integration.aggregator.ReleaseStrategy;
 import org.springframework.integration.config.AbstractSimpleMessageHandlerFactoryBean;
 import org.springframework.integration.handler.advice.HandleMessageAdvice;
@@ -34,7 +33,6 @@ import org.springframework.integration.support.management.AbstractMessageHandler
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.scheduling.TaskScheduler;
-import org.springframework.util.StringUtils;
 
 
 /**
@@ -44,9 +42,7 @@ import org.springframework.util.StringUtils;
  */
 public class MessageConnectorAggregatorFactoryBean extends AbstractSimpleMessageHandlerFactoryBean<MessageConnectorAggregator> {
 
-    private Object processorBean;
-
-    private String methodName;
+    private MessageGroupProcessor processorBean;
 
     private Boolean expireGroupsUponCompletion;
 
@@ -102,7 +98,7 @@ public class MessageConnectorAggregatorFactoryBean extends AbstractSimpleMessage
             .countsEnabled(true);
     }
 
-    public MessageConnectorAggregatorFactoryBean processorBean(Object processorBean) {
+    public MessageConnectorAggregatorFactoryBean processorBean(MessageGroupProcessor processorBean) {
         this.processorBean = processorBean;
         
         return this;
@@ -254,19 +250,7 @@ public class MessageConnectorAggregatorFactoryBean extends AbstractSimpleMessage
     
     @Override
     protected MessageConnectorAggregator createHandler() {
-        MessageGroupProcessor outputProcessor;
-        if (this.processorBean instanceof MessageGroupProcessor) {
-            outputProcessor = (MessageGroupProcessor) this.processorBean;
-        }
-        else {
-            if (!StringUtils.hasText(this.methodName)) {
-                outputProcessor = new MethodInvokingMessageGroupProcessor(this.processorBean);
-            }
-            else {
-                outputProcessor = new MethodInvokingMessageGroupProcessor(this.processorBean, this.methodName);
-            }
-        }
-        MessageConnectorAggregator aggregator = new MessageConnectorAggregator(outputProcessor);
+        MessageConnectorAggregator aggregator = new MessageConnectorAggregator(this.processorBean);
 
         if (this.expireGroupsUponCompletion != null) {
             aggregator.setExpireGroupsUponCompletion(this.expireGroupsUponCompletion);

@@ -149,14 +149,12 @@ public class MessagesCoreAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public CorrelationStrategy correlationStrategy() {
-        // FIXME refactor correlation strategy by Rb, message, correlationKey headers
         return new HeaderAttributeCorrelationStrategy(IntegrationMessageHeaderAccessor.CORRELATION_ID); 
     }
     
     @Bean
     @ConditionalOnMissingBean(name = "metadataStoreKeyStrategy")
     public MessageProcessor<String> metadataStoreKeyStrategy() {
-        // FIXME refactor idempotent message key strategy using dynamic headers
         return m -> Optional.ofNullable(m.getHeaders().get(MessageEventHeaders.MESSAGE_EVENT_ID))
                             .map(Object::toString)
                             .orElseGet(() -> m.getHeaders().getId()
@@ -164,6 +162,7 @@ public class MessagesCoreAutoConfiguration {
     }
     
     @Bean
+    @ConditionalOnMissingBean(name = "messageReceivedHandlerAdvice")
     public MessageConnectorHandlerAdvice messageReceivedHandlerAdvice(MessageGroupStore messageStore,
                                                                       CorrelationStrategy correlationStrategy,
                                                                       LockTemplate lockTemplate) {
@@ -173,6 +172,7 @@ public class MessagesCoreAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean(name = "subscriptionCancelledHandlerAdvice")
     public MessageConnectorHandlerAdvice subscriptionCancelledHandlerAdvice(MessageGroupStore messageStore,
                                                                             CorrelationStrategy correlationStrategy,
                                                                             LockTemplate lockTemplate) {
